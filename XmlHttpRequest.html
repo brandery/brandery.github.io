@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Using the XMLHttpRequest Object</h2>
+
+<div id="demo">
+<button type="button" onclick="loadXMLDoc()">Change Content</button>
+<button type="button" onclick="gettime()">gettime</button>
+<audio controls autoplay src="http://192.168.41.20/file/static/test-ec02664f-8afe-4058-d29d-8d34fbd5c0d3.pcm" style="vertical-align: middle; padding: 5px;"></audio>
+</div>
+
+<script>
+function get_timestamp(time_str="2021-03-22 14:14:30.274"){
+	timestamp_second = Math.round(new Date(time_str).getTime()/1000)
+	return timestamp_second
+}
+function loadXMLDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML = this.responseText;
+      return;
+    }
+    console.error("err:", this.errorDetail)
+  };
+  xhttp.open("GET", "http://192.168.41.20:9020/sleep/120000", true);
+  xhttp.send();
+}
+</script>
+
+</body>
+</html>
